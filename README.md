@@ -1,16 +1,31 @@
-A first-person shooter game inspired by Counter-Strike, built in Unity 6, featuring:
+# 🎮 Counter-Strike Style FPS Game (Unity 6)
 
-  •🧍‍♂️ Custom first-person controller using traditional input scripts
+A single-player first-person shooter inspired by **Counter-Strike**, developed in **Unity 6**. Features custom player movement, AI-powered bots using Unity's NavMesh system, and core combat mechanics.
 
-  •🤖 AI-powered bots with Unity NavMesh navigation
+---
 
-  •🔫 Basic shooting mechanics and weapon system
+## 🔧 Features
 
-  •🔊 Player audio feedback (walking, jumping, firing)
+- ✅ Custom First-Person Controller (WASD + Mouse)
+- ✅ Player jump, shooting, and footstep audio
+- ✅ AI Bots with NavMesh pathfinding
+- ✅ Map imported from `.glb` model (e.g., de_dust2 clone)
+- ✅ Simple weapon system
+- 🚫 No multiplayer (single-player only for now)
 
-  •🗺️ Imported realistic map (e.g., de_dust2 clone in .glb format)
+---
 
-  •🎯 Smooth camera control and customizable movement physics
+## 🎮 Controls
 
-**This is an early development build focused on prototyping core FPS mechanics. Multiplayer is not included (yet).
-Designed for learning, experimentation, and expanding FPS gameplay systems in Unity.**
+| Action       | Key/Mouse        |
+|--------------|------------------|
+| Move         | `W A S D`        |
+| Look Around  | `Mouse Movement` |
+| Jump         | `Space`          |
+| Fire         | `Left Click`     |
+
+---
+
+## 📁 Project Structure
+
+Assets/ ├── Scripts/ │ ├── PlayerMovement.cs │ ├── BotAI.cs │ ├── AudioManager.cs │ └── GunController.cs ├── Models/ │ └── de_dust2.glb ├── Prefabs/ ├── Scenes/ └── Audio/
