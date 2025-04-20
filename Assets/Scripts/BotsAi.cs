@@ -27,7 +27,6 @@ public class BotAI : MonoBehaviour
             if (distance <= shootRange)
             {
                 FacePlayer();
-                // (Shooting comes next)
             }
         }
     }
