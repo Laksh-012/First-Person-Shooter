@@ -1,5 +1,4 @@
 using UnityEngine;
-
 [RequireComponent(typeof(CharacterController))]
 public class SimpleFPSController : MonoBehaviour
 {
@@ -14,7 +13,7 @@ public class SimpleFPSController : MonoBehaviour
     public float maxPitch = 80f;
 
     [Header("Camera")]
-    public Transform cameraTransform; // Drag the camera here in Inspector
+    public Transform cameraTransform; 
 
     private CharacterController controller;
     private float verticalVelocity;
@@ -42,7 +41,8 @@ public class SimpleFPSController : MonoBehaviour
         pitch -= mouseY;
         pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
 
-        // Apply rotation
+
+        
         cameraTransform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
