@@ -61,17 +61,13 @@ public class PlayerAudioController : MonoBehaviour
 
     void HandleFire()
     {
-        // Play every time you click
         if (Input.GetButtonDown("Fire1"))
         {
             audioSource.PlayOneShot(fireClip);
         }
 
-        // Optional: automatic fire sound (hold to fire repeatedly)
-
         if (Input.GetButton("Fire1"))
         {
-            // Add fire rate timer if needed
             if (!audioSource.isPlaying)
                 audioSource.PlayOneShot(fireClip);
         }
