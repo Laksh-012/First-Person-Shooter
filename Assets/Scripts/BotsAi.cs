@@ -1,45 +1,73 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BotAI : MonoBehaviour
+public class SimpleBotAI : MonoBehaviour
 {
-    public Transform player;
-    public float detectionRange = 20f;
-    public float shootRange = 10f;
-    public float moveSpeed = 3.5f;
+    public Transform[] patrolPoints;
+    public float detectionRange = 30f;
+    public float attackRange = 10f;
+    public float patrolWaitTime = 2f;
 
+    private int currentPoint = 0;
+    private float waitTimer = 0f;
+    public Transform player;
     private NavMeshAgent agent;
+    private bool chasingPlayer = false;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.speed = moveSpeed;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        if (patrolPoints.Length > 0)
+        {
+            agent.SetDestination(patrolPoints[currentPoint].position);
+        }
     }
 
     void Update()
     {
-        float distance = Vector3.Distance(transform.position, player.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (distance <= detectionRange)
+        if (distanceToPlayer <= detectionRange)
         {
             agent.SetDestination(player.position);
+            chasingPlayer = true;
 
-            if (distance <= shootRange)
+            if (distanceToPlayer <= attackRange)
             {
-                FacePlayer();
+                Debug.Log("Bot is attacking the player!");
+            }
+        }
+        else if (chasingPlayer)
+        {
+            chasingPlayer = false;
+            GoToNextPatrolPoint();
+        }
+        else
+        {
+            Patrol();
+        }
+    }
+
+    void Patrol()
+    {
+        if (patrolPoints.Length == 0) return;
+
+        if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        {
+            waitTimer += Time.deltaTime;
+            if (waitTimer >= patrolWaitTime)
+            {
+                GoToNextPatrolPoint();
+                waitTimer = 0f;
             }
         }
     }
 
-    void FacePlayer()
+    void GoToNextPatrolPoint()
     {
-        Vector3 direction = (player.position - transform.position).normalized;
-        direction.y = 0f;
-
-        if (direction != Vector3.zero)
-        {
-            Quaternion lookRot = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 5f);
-        }
+        currentPoint = (currentPoint + 1) % patrolPoints.Length;
+        agent.SetDestination(patrolPoints[currentPoint].position);
     }
 }

@@ -65,7 +65,7 @@ public class PlayerAudioController : MonoBehaviour
         {
             audioSource.PlayOneShot(fireClip);
         }
-
+        
         if (Input.GetButton("Fire1"))
         {
             if (!audioSource.isPlaying)
